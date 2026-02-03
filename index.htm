@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Valentine</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap" rel="stylesheet">
+
+  <style>
+    .cursor-heart {
+  position: fixed;
+  pointer-events: none;
+  font-size: 14px;
+  animation: cursorFloat 1.2s ease-out forwards;
+}
+
+@keyframes cursorFloat {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-30px) scale(0.5);
+    opacity: 0;
+  }
+}
+
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      font-family: 'Bubblegum Sans', cursive;
+      background: #ffc0cb;
+    }
+
+    /* HEART BACKGROUND */
+    .hearts {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .heart {
+      position: absolute;
+      bottom: -20px;
+      font-size: 20px;
+      animation: floatUp linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(0); }
+      to { transform: translateY(-110vh); }
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .floating span {
+      display: inline-block;
+      font-weight: bold;
+      font-size: 40px;
+      color: #ff2f92;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .floating span:nth-child(even) {
+      animation-duration: 4s;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+      100% { transform: translateY(0); }
+    }
+
+    button {
+      padding: 15px 25px;
+      font-size: 18px;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      position: absolute;
+    }
+
+    #yes {
+      background: hotpink;
+      color: white;
+      top: 60%;
+      transition: transform 0.2s;
+    }
+
+    #no {
+      background: lightgray;
+      top: 70%;
+    }
+  </style>
+</head>
+<body>
+
+<div class="hearts" id="hearts"></div>
+
+<div class="container">
+  <h1 class="floating">
+    <span>W</span><span>i</span><span>l</span><span>l</span>
+    <span>&nbsp;</span>
+    <span>y</span><span>o</span><span>u</span>
+    <span>&nbsp;</span>
+    <span>b</span><span>e</span>
+    <span>&nbsp;</span>
+    <span>m</span><span>y</span>
+    <span>&nbsp;</span>
+    <span>V</span><span>a</span><span>l</span><span>e</span><span>n</span><span>t</span><span>i</span><span>n</span><span>e</span><span>?</span>
+  </h1>
+
+  <button id="yes">Yes 💖</button>
+  <button id="no">No 💔</button>
+</div>
+
+<script>
+  const yes = document.getElementById("yes");
+  const no = document.getElementById("no");
+  const hearts = document.getElementById("hearts");
+
+  /* NO button runs away */
+  no.addEventListener("mouseenter", () => {
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 100);
+    no.style.left = x + "px";
+    no.style.top = y + "px";
+  });
+
+  /* YES follows cursor */
+  document.addEventListener("mousemove", (e) => {
+    yes.style.left = e.pageX - 40 + "px";
+    yes.style.top = e.pageY - 20 + "px";
+  });
+
+  /* Hearts generator */
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerText = "💗";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (3 + Math.random() * 4) + "s";
+    hearts.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 7000);
+  }, 300);
+
+  /* YES click */
+  yes.onclick = () => {
+  window.location.href = "yay.html";
+};
+</script>
+
+</body>
+</html>

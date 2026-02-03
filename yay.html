@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>YAY 💖</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Bubblegum Sans', cursive;
+      background: #ffd6e8;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 64px;
+      margin-top: 40px;
+      color: #ff2f92;
+    }
+
+    .image {
+      font-size: 90px;
+      margin: 20px;
+    }
+
+    .choices {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .box {
+      background: #ffc0e0;
+      border: 4px solid purple;
+      border-radius: 20px;
+      padding: 20px;
+      width: 180px;
+      cursor: pointer;
+      font-size: 20px;
+      transition: transform 0.2s;
+    }
+
+    .box:hover {
+      transform: scale(1.1);
+    }
+
+    .icon {
+      font-size: 50px;
+      margin-bottom: 10px;
+    }
+
+    /* HEARTS */
+    .heart {
+      position: fixed;
+      bottom: -20px;
+      animation: floatUp linear infinite;
+      opacity: 0.6;
+      font-size: 20px;
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(0); }
+      to { transform: translateY(-110vh); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>YAYYYY 💖🎉</h1>
+
+  <div class="image">🐱</div>
+
+  <div class="choices">
+    <div class="box" onclick="goNote()">
+      <div class="icon">🎡</div>
+      Carnival
+    </div>
+
+    <div class="box" onclick="goNote()">
+      <div class="icon">🍽️</div>
+      Go out to eat
+    </div>
+
+    <div class="box" onclick="goNote()">
+      <div class="icon">🎞️</div>
+      Cinema
+    </div>
+  </div>
+
+  <script>
+    function goNote() {
+      window.location.href = "note.html";
+    }
+
+    setInterval(() => {
+      const h = document.createElement("div");
+      h.className = "heart";
+      h.innerText = "💗";
+      h.style.left = Math.random() * 100 + "vw";
+      h.style.animationDuration = (3 + Math.random() * 4) + "s";
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), 7000);
+    }, 300);
+  </script>
+
+</body>
+</html>

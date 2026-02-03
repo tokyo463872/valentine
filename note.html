@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Love</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Bubblegum Sans', cursive;
+      background: pink;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .hearts {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .heart {
+      position: absolute;
+      bottom: -20px;
+      animation: floatUp linear infinite;
+      opacity: 0.5;
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(0); }
+      to { transform: translateY(-110vh); }
+    }
+
+    .notebook {
+      background: #fff0f8;
+      border: 5px solid purple;
+      border-radius: 20px;
+      padding: 30px;
+      width: 70%;
+      max-width: 600px;
+      font-size: 18px;
+      line-height: 1.6;
+      z-index: 2;
+    }
+  </style>
+</head>
+<body>
+
+<div class="hearts" id="hearts"></div>
+
+<div class="notebook" id="text"></div>
+
+<script>
+  const message = `My love,
+
+I just wanted to remind you how much you mean to me. Everyday with you feels warmer, brighter and a little more magical.
+
+Thank you for the laughs, the late nights, and the quiet moments in between. No matter where life takes us, you are my favorite place to return to.
+
+I’m so thankful for you. Always.
+
+I love you the mostestest. 💖`;
+
+  let i = 0;
+  const speed = 40;
+  const textDiv = document.getElementById("text");
+
+  function type() {
+    if (i < message.length) {
+      textDiv.innerHTML += message.charAt(i);
+      i++;
+      setTimeout(type, speed);
+    }
+  }
+
+  type();
+
+  const hearts = document.getElementById("hearts");
+  setInterval(() => {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerText = "💗";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.animationDuration = (3 + Math.random() * 4) + "s";
+    hearts.appendChild(h);
+    setTimeout(() => h.remove(), 7000);
+  }, 300);
+</script>
+
+</body>
+</html>
