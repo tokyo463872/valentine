@@ -168,16 +168,26 @@ setInterval(createHeart,250);
 
 /* NO button runs away */
 
-let no=document.getElementById("no");
+let no = document.getElementById("no");
+let yes = document.getElementById("yes");
 
-no.addEventListener("mouseover",()=>{
+let yesSize = 20; // starting font size
 
-let x=Math.random()*window.innerWidth;
-let y=Math.random()*window.innerHeight;
+no.addEventListener("mouseover", () => {
 
-no.style.position="absolute";
-no.style.left=x+"px";
-no.style.top=y+"px";
+    // move the NO button
+    let x = Math.random() * window.innerWidth;
+    let y = Math.random() * window.innerHeight;
+
+    no.style.position = "absolute";
+    no.style.left = x + "px";
+    no.style.top = y + "px";
+
+    // increase YES button size
+    yesSize += 10;
+
+    yes.style.fontSize = yesSize + "px";
+    yes.style.padding = (12 + yesSize/5) + "px " + (30 + yesSize/5) + "px";
 
 });
 
@@ -194,3 +204,4 @@ window.location.href="yay.html";
 
 </body>
 </html>
+
