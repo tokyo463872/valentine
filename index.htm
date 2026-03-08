@@ -171,19 +171,24 @@ setInterval(createHeart,250);
 let no = document.getElementById("no");
 let yes = document.getElementById("yes");
 
-let yesSize = 20; // starting font size
+let yesSize = 20;
 
 no.addEventListener("mouseover", () => {
 
-    // move the NO button
-    let x = Math.random() * window.innerWidth;
-    let y = Math.random() * window.innerHeight;
+    const buttonWidth = no.offsetWidth;
+    const buttonHeight = no.offsetHeight;
+
+    const maxX = window.innerWidth - buttonWidth;
+    const maxY = window.innerHeight - buttonHeight;
+
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
 
     no.style.position = "absolute";
     no.style.left = x + "px";
     no.style.top = y + "px";
 
-    // increase YES button size
+    // grow YES button
     yesSize += 10;
 
     yes.style.fontSize = yesSize + "px";
@@ -204,4 +209,5 @@ window.location.href="yay.html";
 
 </body>
 </html>
+
 
