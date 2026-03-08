@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
-
 <head>
+
 <title>Will you be my Valentine?</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500&display=swap" rel="stylesheet">
@@ -9,132 +9,164 @@
 <style>
 
 body{
-background:#ffc0cb;
-overflow:hidden;
-text-align:center;
-font-family:'Cinzel',serif;
 margin:0;
+font-family:'Cinzel',serif;
+overflow:hidden;
+
+/* paper notebook background */
+
+background:
+repeating-linear-gradient(
+white,
+white 28px,
+#d4e4ff 29px
+);
+
 }
 
-/* floating hearts background */
+/* scrunched paper look */
+
+body::before{
+content:"";
+position:absolute;
+width:100%;
+height:100%;
+background-image:url("https://www.transparenttextures.com/patterns/paper-fibers.png");
+opacity:0.6;
+pointer-events:none;
+}
+
+/* floating hearts */
+
 .heart{
 position:absolute;
-color:#ff69b4;
-font-size:20px;
-animation:float 6s linear infinite;
+color:#ff6aa7;
+font-size:18px;
+animation:float 7s linear infinite;
 }
 
 @keyframes float{
-0%{transform:translateY(100vh);opacity:1;}
-100%{transform:translateY(-10vh);opacity:0;}
+
+0%{
+transform:translateY(100vh);
+opacity:1;
 }
 
-/* title */
-h1{
-font-size:50px;
-font-weight:bold;
-margin-top:60px;
+100%{
+transform:translateY(-10vh);
+opacity:0;
 }
 
-/* floating letters */
-h1 span{
-display:inline-block;
-animation:floatLetter 3s ease-in-out infinite;
 }
 
-@keyframes floatLetter{
-0%{transform:translateY(0px);}
-50%{transform:translateY(-10px);}
-100%{transform:translateY(0px);}
+/* center container */
+
+.container{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+text-align:center;
 }
 
-/* image */
-img{
-width:250px;
-margin-top:30px;
+/* video */
+
+video{
+width:260px;
 border-radius:20px;
+margin-bottom:20px;
+}
+
+/* text */
+
+h1{
+font-size:48px;
+margin-bottom:25px;
 }
 
 /* buttons */
 
 button{
+
 font-family:'Cinzel',serif;
 font-size:20px;
 letter-spacing:2px;
+
 padding:12px 30px;
+
 border-radius:12px;
+
 border:3px solid purple;
+
 background:pink;
+
 cursor:pointer;
-position:absolute;
+
+margin:10px;
+
+transition:0.2s;
+
 }
 
-#yes{
-left:45%;
-top:70%;
+button:hover{
+transform:scale(1.1);
 }
+
+/* no button runaway */
 
 #no{
-left:55%;
-top:70%;
-}
-
-.cursorHeart{
-position:absolute;
-pointer-events:none;
-font-size:15px;
-animation:fade 1s linear forwards;
-}
-
-@keyframes fade{
-0%{opacity:1;}
-100%{opacity:0; transform:translateY(-20px);}
+position:relative;
 }
 
 </style>
+
 </head>
 
 <body>
 
-<h1 id="title"></h1>
+<div class="container">
 
-<img src="img-main.png">
+<!-- looping video -->
+
+<video autoplay muted loop>
+<source src="video.mp4" type="video/mp4">
+</video>
+
+<h1>Will you be my Valentine?</h1>
 
 <button id="yes">YES</button>
 <button id="no">NO</button>
 
+</div>
+
 <script>
 
-/* floating letters */
-let text="Will you be my Valentine?";
-let title=document.getElementById("title");
-
-text.split("").forEach(letter=>{
-let span=document.createElement("span");
-span.innerHTML=letter;
-span.style.animationDelay=Math.random()*2+"s";
-title.appendChild(span);
-});
-
-/* hearts background */
+/* floating hearts */
 
 function createHeart(){
+
 let heart=document.createElement("div");
+
 heart.className="heart";
+
 heart.innerHTML="❤";
+
 heart.style.left=Math.random()*100+"vw";
-heart.style.fontSize=Math.random()*20+10+"px";
+
+heart.style.fontSize=(Math.random()*15+10)+"px";
 
 document.body.appendChild(heart);
 
 setTimeout(()=>{
 heart.remove();
-},6000);
+},7000);
+
 }
 
-setInterval(createHeart,200);
+setInterval(createHeart,250);
 
-/* no button runs away */
+
+/* NO button runs away */
 
 let no=document.getElementById("no");
 
@@ -143,67 +175,22 @@ no.addEventListener("mouseover",()=>{
 let x=Math.random()*window.innerWidth;
 let y=Math.random()*window.innerHeight;
 
+no.style.position="absolute";
 no.style.left=x+"px";
 no.style.top=y+"px";
 
 });
 
-/* yes button follows cursor */
 
-let yes=document.getElementById("yes");
+/* YES button redirect */
 
-document.addEventListener("mousemove",(e)=>{
-yes.style.left=(e.clientX+20)+"px";
-yes.style.top=(e.clientY+20)+"px";
-});
+document.getElementById("yes").onclick=function(){
 
-/* hearts on click */
-
-document.addEventListener("click",(e)=>{
-
-for(let i=0;i<10;i++){
-
-let heart=document.createElement("div");
-
-heart.className="cursorHeart";
-heart.innerHTML="❤";
-
-heart.style.left=e.clientX+"px";
-heart.style.top=e.clientY+"px";
-
-document.body.appendChild(heart);
-
-setTimeout(()=>heart.remove(),1000);
-
-}
-
-});
-
-/* yes redirect */
-
-yes.onclick=function(){
 window.location.href="yay.html";
-}
 
-/* hearts following cursor */
-
-document.addEventListener("mousemove",(e)=>{
-
-let heart=document.createElement("div");
-heart.className="cursorHeart";
-heart.innerHTML="❤";
-
-heart.style.left=e.clientX+"px";
-heart.style.top=e.clientY+"px";
-
-document.body.appendChild(heart);
-
-setTimeout(()=>heart.remove(),800);
-
-});
+};
 
 </script>
 
 </body>
 </html>
-
