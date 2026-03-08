@@ -178,26 +178,26 @@ no.addEventListener("mouseover", () => {
     const buttonWidth = no.offsetWidth;
     const buttonHeight = no.offsetHeight;
 
-    const margin = 10; // keeps button slightly away from edges
+    const safePadding = 50;
 
-    const maxX = window.innerWidth - buttonWidth - margin;
-    const maxY = window.innerHeight - buttonHeight - margin;
+    const maxX = window.innerWidth - buttonWidth - safePadding;
+    const maxY = window.innerHeight - buttonHeight - safePadding;
 
-    const minX = margin;
-    const minY = margin;
+    const minX = safePadding;
+    const minY = safePadding;
 
-    const x = Math.random() * (maxX - minX) + minX;
-    const y = Math.random() * (maxY - minY) + minY;
+    const x = Math.floor(Math.random() * (maxX - minX) + minX);
+    const y = Math.floor(Math.random() * (maxY - minY) + minY);
 
-    no.style.position = "fixed";  // important: keeps it inside viewport
+    no.style.position = "fixed";
     no.style.left = x + "px";
     no.style.top = y + "px";
 
-    // grow YES button
-    yesSize += 10;
+    // Grow YES button
+    yesSize += 8;
 
     yes.style.fontSize = yesSize + "px";
-    yes.style.padding = (12 + yesSize/5) + "px " + (30 + yesSize/5) + "px";
+    yes.style.padding = (12 + yesSize/4) + "px " + (30 + yesSize/4) + "px";
 });
 
 
@@ -213,6 +213,7 @@ window.location.href="yay.html";
 
 </body>
 </html>
+
 
 
 
